@@ -26,10 +26,10 @@ class TestParsing:
         obj = Nested.lazy_parse(
             {
                 "s": {"i": "10", "s": "test"},
-                "l": [{"i": "10", "s": "test"}, {"i": "10", "s": "test"}],
+                "lst": [{"i": "10", "s": "test"}, {"i": "10", "s": "test"}],
             }
         )
-        assert obj.__dict__ == {"s": NAO, "l": NAO}
+        assert obj.__dict__ == {"s": NAO, "lst": NAO}
         assert obj.s == Simple(i=10, s="TEST")
         assert obj.lst == [Simple(i=10, s="TEST"), Simple(i=10, s="TEST")]
 
