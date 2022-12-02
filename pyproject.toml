@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "lazy-model"
+version = "0.0.3"
+description = ""
+authors = ["Roman <roman-right@protonmail.com>"]
+readme = "README.md"
+packages = [{include = "lazy_model"}]
+
+[tool.poetry.dependencies]
+python = ">=3.7,<4.0"
+pydantic = ">=1.9.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.0"
+
+[tool.black]
+line-length = 79
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
