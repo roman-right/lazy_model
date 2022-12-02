@@ -17,4 +17,4 @@ jobs:
       - name: flake8 install
         run: pip3 install flake8
       - name: lint
-        run: flake8 red_models/ tests/
+        run: flake8 lazy_model/ tests/
