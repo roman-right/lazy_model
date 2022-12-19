@@ -1,6 +1,6 @@
 from typing import List
 
-from pydantic import validator, root_validator
+from pydantic import validator, root_validator, Field
 
 from lazy_model.main import LazyModel
 
@@ -26,3 +26,7 @@ class Nested(LazyModel):
 
 class Inherited(Simple):
     f: float
+
+
+class WithAlias(LazyModel):
+    i: int = Field(alias="_i_alias")

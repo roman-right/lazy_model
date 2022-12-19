@@ -1,5 +1,5 @@
 from lazy_model.main import NAO
-from tests.models import Simple, Nested, Inherited
+from tests.models import Simple, Nested, Inherited, WithAlias
 
 
 class TestParsing:
@@ -39,3 +39,8 @@ class TestParsing:
         assert obj.i == 10
         obj.parse_store()
         assert obj.__dict__ == {"f": 1.23, "i": 10, "s": "TEST"}
+
+    def test_with_alias(self):
+        obj = WithAlias.lazy_parse({"_i_alias": 100})
+        assert obj.__dict__ == {"i": NAO}
+        assert obj.i == 100

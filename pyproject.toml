@@ -1,8 +1,10 @@
 [tool.poetry]
 name = "lazy-model"
-version = "0.0.4"
+version = "0.0.5"
 description = ""
-authors = ["Roman <roman-right@protonmail.com>"]
+authors = ["Roman Right <roman-right@protonmail.com>"]
+license = "Apache-2.0"
+include = ["LICENSE"]
 readme = "README.md"
 packages = [{include = "lazy_model"}]
 
