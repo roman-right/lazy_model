@@ -42,5 +42,5 @@ class TestParsing:
 
     def test_with_alias(self):
         obj = WithAlias.lazy_parse({"_i_alias": 100})
-        assert obj.__dict__ == {'i': NAO}
+        assert obj.__dict__ == {"i": NAO}
         assert obj.i == 100
