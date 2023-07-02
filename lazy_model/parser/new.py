@@ -34,7 +34,7 @@ class LazyModel(BaseModel):
         m._store = data
 
         for alias in fields:
-            m.__setattr__(field_alias_map[alias], data[alias])
+            m._set_attr(field_alias_map[alias], data[alias])
         return m
 
     def _parse_value(self, name, value):
@@ -52,7 +52,7 @@ class LazyModel(BaseModel):
         for name in self.model_fields:
             self.__getattribute__(name)
 
-    def __setattr__(self, name: str, value: Any) -> None:
+    def _set_attr(self, name: str, value: Any) -> None:
         """
         Stolen from Pydantic.
         :param name:
@@ -99,6 +99,6 @@ class LazyModel(BaseModel):
                 value = field_info.get_default()
             else:
                 value = self._parse_value(item, value)
-            self.__setattr__(item, value)
+            self._set_attr(item, value)
             res = super(LazyModel, self).__getattribute__(item)
         return res

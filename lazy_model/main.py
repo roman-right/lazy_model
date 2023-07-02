@@ -1,5 +1,5 @@
 import pydantic
-from nao import NAO
+from lazy_model.nao import NAO
 
 # check pydantic version
 if pydantic.version.VERSION.split(".")[0] == 1:
