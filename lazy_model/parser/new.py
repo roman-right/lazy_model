@@ -16,9 +16,9 @@ class LazyModel(BaseModel):
 
     @classmethod
     def lazy_parse(
-            cls,
-            data: Dict[str, Any],
-            fields: Optional[Set[str]] = None,
+        cls,
+        data: Dict[str, Any],
+        fields: Optional[Set[str]] = None,
     ):
         fields_values = {}
         field_alias_map = {}
@@ -63,26 +63,31 @@ class LazyModel(BaseModel):
         """
         if name in self.__class_vars__:
             raise AttributeError(
-                f'{name!r} is a ClassVar of `{self.__class__.__name__}` and cannot be set on an instance. '
-                f'If you want to set a value on the class, use `{self.__class__.__name__}.{name} = value`.'
+                f"{name!r} is a ClassVar of `{self.__class__.__name__}` and cannot be set on an instance. "  # noqa: E501
+                f"If you want to set a value on the class, use `{self.__class__.__name__}.{name} = value`."  # noqa: E501
             )
         elif not _fields.is_valid_field_name(name):
-            if self.__pydantic_private__ is None or name not in self.__private_attributes__:
+            if (
+                self.__pydantic_private__ is None
+                or name not in self.__private_attributes__
+            ):
                 _object_setattr(self, name, value)
             else:
                 attribute = self.__private_attributes__[name]
-                if hasattr(attribute, '__set__'):
+                if hasattr(attribute, "__set__"):
                     attribute.__set__(self, value)  # type: ignore
                 else:
                     self.__pydantic_private__[name] = value
             return
-        elif self.model_config.get('frozen', None):
+        elif self.model_config.get("frozen", None):
             error: pydantic_core.InitErrorDetails = {
-                'type': 'frozen_instance',
-                'loc': (name,),
-                'input': value,
+                "type": "frozen_instance",
+                "loc": (name,),
+                "input": value,
             }
-            raise pydantic_core.ValidationError.from_exception_data(self.__class__.__name__, [error])
+            raise pydantic_core.ValidationError.from_exception_data(
+                self.__class__.__name__, [error]
+            )
 
         attr = getattr(self.__class__, name, None)
         if isinstance(attr, property):

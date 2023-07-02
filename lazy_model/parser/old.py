@@ -16,10 +16,10 @@ class LazyModel(BaseModel):
 
     @classmethod
     def lazy_parse(
-            cls,
-            data: Dict[str, Any],
-            fields: Optional[Set[str]] = None,
-            **new_kwargs,
+        cls,
+        data: Dict[str, Any],
+        fields: Optional[Set[str]] = None,
+        **new_kwargs,
     ):
         m = cls.__new__(cls, **new_kwargs)  # type: ignore
         if fields is None:
