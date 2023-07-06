@@ -8,7 +8,8 @@ jobs:
       matrix:
         python-version: [ 3.7, 3.8, 3.9, 3.10.5 ]
         poetry-version: [ 1.2 ]
-        os: [ ubuntu-18.04 ]
+        pydantic-version: [ 1.10.0, 2.0 ]
+        os: [ ubuntu-latest ]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -21,5 +22,7 @@ jobs:
           poetry-version: ${{ matrix.poetry-version }}
       - name: poetry install
         run: poetry install
+      - name: pydantic install
+        run: poetry add pydantic==${{ matrix.pydantic-version }}
       - name: run tests
         run: poetry run pytest

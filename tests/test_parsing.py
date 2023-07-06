@@ -1,4 +1,4 @@
-from lazy_model.main import NAO
+from lazy_model.nao import NAO
 from tests.models import Simple, Nested, Inherited, WithAlias
 
 
