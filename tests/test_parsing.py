@@ -48,7 +48,6 @@ class TestParsing:
 
     def test_with_class(self):
         class A(LazyModel):
-
             def test_func(self):
                 print("test_func")
 
