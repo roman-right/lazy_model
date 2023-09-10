@@ -1,3 +1,4 @@
+from lazy_model import LazyModel
 from lazy_model.nao import NAO
 from tests.models import Simple, Nested, Inherited, WithAlias
 
@@ -44,3 +45,12 @@ class TestParsing:
         obj = WithAlias.lazy_parse({"_i_alias": 100})
         assert obj.__dict__ == {"i": NAO}
         assert obj.i == 100
+
+    def test_with_class(self):
+        class A(LazyModel):
+            def test_func(self):
+                print("test_func")
+
+        # Test
+        A.__getattribute__(A, "test_func")
+        A().__getattribute__("test_func")

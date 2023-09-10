@@ -95,7 +95,16 @@ class LazyModel(BaseModel):
         self.__pydantic_validator__.validate_assignment(self, name, value)
 
     def __getattribute__(self, item):
-        res = super(LazyModel, self).__getattribute__(item)
+        # If __class__ is accessed, return it directly to avoid recursion
+        if item == "__class__":
+            return super().__getattribute__(item)
+
+        # If called on the class itself, delegate to super's __getattribute__
+        if type(self) is type:  # Check if self is a class
+            return super(type, self).__getattribute__(item)
+
+        # For instances, use the object's __getattribute__ to prevent recursion
+        res = object.__getattribute__(self, item)
         if res is NAO:
             field_info = self.model_fields.get(item)
             alias = field_info.alias or item
